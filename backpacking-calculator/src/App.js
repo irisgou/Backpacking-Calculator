@@ -74,19 +74,6 @@ function App() {
 
     setLoading(true);
 
-    // const terrainFactors = {
-    //   "Slippery Terrain": 1.7,
-    //   Vegetation: -1, // Handle this case separately if needed
-    //   Swamp: 3.5,
-    //   "Paved Road": 1.0,
-    //   "Gravel Road": 1.0,
-    //   "Dirt Road": 1.2,
-    //   Sand: -2, // Handle this case separately if needed
-    // };
-
-    // const terrainFactor = terrainFactors[terrain] || 1.0; // Default to 1.0 if terrain factor is null
-    // const terrainFactor = terrainFactors[terrain] || 1.0;
-
     // Prepare data
     const data = {
       weight: parsedWeight,
@@ -97,8 +84,6 @@ function App() {
       isSpeedMps,
       incline_grade: parsedGrade,
       terrain_type: terrain,
-      // remove later if needed
-      // terrain_factor: terrainFactor,
       hours: parsedHours,
     };
 
@@ -125,36 +110,22 @@ function App() {
     }
   };
 
-  // remove later
-  // try {
-  //   const response = await fetch("http://127.0.0.1:8080/calculate", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(data),
-  //   });
-
-  //   if (!response.ok) {
-  //     throw new Error("Failed to fetch results. Please try again.");
-  //   }
-
-  //   const result = await response.json();
-  //   setCaloriesPerHour(result.calories_per_hour.toFixed(2));
-  //     setCaloriesPerHour(result.calories_per_hour);
-
-  //     // setTotalCalories(result.total_calories.toFixed(2));
-  //   } catch (err) {
-  //     setError(err.message || "An unexpected error occurred.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full">
+      <div className="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full mx-auto">
         <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
           Backpacking Calorie Burn Calculator
         </h1>
+        <h2>
+          Based on{" "}
+          <a
+            href="https://journals.physiology.org/doi/abs/10.1152/jappl.1977.43.4.577"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Pandolf, K. B., Givoni, B., & Goldman, R. F. (1977)
+          </a>
+        </h2>
 
         {/* <WebSocketComponent /> */}
 
@@ -170,7 +141,6 @@ function App() {
                 step="any"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
-                // focus:ring-blue-500 focus:border-blue-500
                 className="flex-1 border border-gray-300 rounded-l-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                 placeholder={`Enter weight in ${isWeightKg ? "kg" : "lbs"}`}
                 required

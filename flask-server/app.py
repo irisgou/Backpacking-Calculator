@@ -12,7 +12,26 @@ def home():
 def websocket_route():
     return "WebSocket route"
 
-def calculate_calories(weight, pack_weight, speed, incline_grade, terrain_factor):
+def get_terrain_factor(terrain_type, speed):
+    terrain_factor = None
+    if terrain_type == "Slippery Terrain":
+        terrain_factor = 1.7
+    elif terrain_type == "Vegetation":
+        terrain_factor = (0.0718 * speed) ** 3 + (1.3 * speed) ** 2 - (5.3701 * speed) + 6.0705
+    elif terrain_type == "Swamp":
+        terrain_factor = 3.5
+    elif terrain_type == "Paved Road" or terrain_type == "Gravel Road":
+        terrain_factor = 1.0
+    elif terrain_type == "Dirt Road":
+        terrain_factor = 1.2
+    elif terrain_type == "Sand":
+        terrain_factor = 1.5 + (1.3 / (speed ** 2))
+    else:
+        terrain_factor = 1.0  # Default terrain factor if not specified
+    return terrain_factor
+
+
+def calculate_calories(weight, pack_weight, speed, incline_grade, terrain_type):
     """
     Calculate the calories burned per hour based on the given parameters.
     
@@ -27,12 +46,17 @@ def calculate_calories(weight, pack_weight, speed, incline_grade, terrain_factor
     - float: Calories burned per hour.
     """
     # vegetation set to -1 as dummy value
-    if terrain_factor == -1:
-        terrain_factor = (0.0718 * speed) ** 3 + (1.3 * speed) ** 2 - (5.3701 * speed) + 6.0705 
+    # if terrain_factor == -1:
+    #     terrain_factor = (0.0718 * speed) ** 3 + (1.3 * speed) ** 2 - (5.3701 * speed) + 6.0705 
 
-    # sand set to -2 as dummy value
-    elif terrain_factor == -2:
-        terrain_factor = 1.5 + (1.3 / (speed **2))
+    # # sand set to -2 as dummy value
+    # elif terrain_factor == -2:
+    #     terrain_factor = 1.5 + (1.3 / (speed **2))
+
+    # elif terrain_factor is None:
+    #     raise ValueError("Terrain factor must be a numeric value.")
+
+    terrain_factor = get_terrain_factor(terrain_type, speed)
 
     # Calculate the total metabolic rate in watts (M)
     M = 1.5 * weight + 2.0 * (weight + pack_weight) * (pack_weight / weight) ** 2
@@ -40,7 +64,7 @@ def calculate_calories(weight, pack_weight, speed, incline_grade, terrain_factor
     
     # Convert watts to calories per hour
     calories_per_hour = M * 3600 / 4184
-    return calories_per_hour
+    return round(calories_per_hour)
 
 @app.route('/calculate', methods=['POST'])
 def calculate():
@@ -54,9 +78,9 @@ def calculate():
     pack_weight = data['pack_weight']
     speed = data['speed']
     incline_grade = data['incline_grade']
-    terrain_factor = data['terrain_factor']
+    terrain_type = data['terrain_type']
     
-    result = calculate_calories(weight, pack_weight, speed, incline_grade, terrain_factor)
+    result = calculate_calories(weight, pack_weight, speed, incline_grade, terrain_type)
     
     return jsonify({"calories_per_hour": result})
 

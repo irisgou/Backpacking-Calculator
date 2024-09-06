@@ -7,13 +7,13 @@ import {
 // import WebSocketComponent from "./WebSocketComponent";
 
 const terrainOptions = [
-  { label: "Slippery Terrain", value: 1.7 },
-  { label: "Vegetation", value: null }, // Will calculate based on speed
-  { label: "Swamp", value: 3.5 },
-  { label: "Paved Road", value: 1.0 },
-  { label: "Gravel Road", value: 1.0 },
-  { label: "Dirt Road", value: 1.2 },
-  { label: "Sand", value: null }, // Will calculate based on speed
+  { label: "Slippery Terrain", value: "Slippery Terrain" },
+  { label: "Vegetation", value: "Vegetation" }, // Will calculate based on speed
+  { label: "Swamp", value: "Swamp" },
+  { label: "Paved Road", value: "Paved Road" },
+  { label: "Gravel Road", value: "Gravel Road" },
+  { label: "Dirt Road", value: "Dirt Road" },
+  { label: "Sand", value: "Sand" }, // Will calculate based on speed
 ];
 
 function App() {
@@ -74,17 +74,18 @@ function App() {
 
     setLoading(true);
 
-    const terrainFactors = {
-      "Slippery Terrain": 1.7,
-      Vegetation: null, // Handle this case separately if needed
-      Swamp: 3.5,
-      "Paved Road": 1.0,
-      "Gravel Road": 1.0,
-      "Dirt Road": 1.2,
-      Sand: null, // Handle this case separately if needed
-    };
+    // const terrainFactors = {
+    //   "Slippery Terrain": 1.7,
+    //   Vegetation: -1, // Handle this case separately if needed
+    //   Swamp: 3.5,
+    //   "Paved Road": 1.0,
+    //   "Gravel Road": 1.0,
+    //   "Dirt Road": 1.2,
+    //   Sand: -2, // Handle this case separately if needed
+    // };
 
-    const terrainFactor = terrainFactors[terrain] || 1.0; // Default to 1.0 if terrain factor is null
+    // const terrainFactor = terrainFactors[terrain] || 1.0; // Default to 1.0 if terrain factor is null
+    // const terrainFactor = terrainFactors[terrain] || 1.0;
 
     // Prepare data
     const data = {
@@ -95,7 +96,9 @@ function App() {
       speed: parsedSpeed,
       isSpeedMps,
       incline_grade: parsedGrade,
-      terrain_factor: terrainFactor,
+      terrain_type: terrain,
+      // remove later if needed
+      // terrain_factor: terrainFactor,
       hours: parsedHours,
     };
 
@@ -111,14 +114,40 @@ function App() {
       }
 
       const result = await response.json();
-      setCaloriesPerHour(result.calories_per_hour.toFixed(2));
-      setTotalCalories(result.total_calories.toFixed(2));
+
+      // Update state with the result
+      setCaloriesPerHour(result.calories_per_hour);
+      setTotalCalories(result.calories_per_hour * parsedHours);
     } catch (err) {
       setError(err.message || "An unexpected error occurred.");
     } finally {
       setLoading(false);
     }
   };
+
+  // remove later
+  // try {
+  //   const response = await fetch("http://127.0.0.1:8080/calculate", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(data),
+  //   });
+
+  //   if (!response.ok) {
+  //     throw new Error("Failed to fetch results. Please try again.");
+  //   }
+
+  //   const result = await response.json();
+  //   setCaloriesPerHour(result.calories_per_hour.toFixed(2));
+  //     setCaloriesPerHour(result.calories_per_hour);
+
+  //     // setTotalCalories(result.total_calories.toFixed(2));
+  //   } catch (err) {
+  //     setError(err.message || "An unexpected error occurred.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">

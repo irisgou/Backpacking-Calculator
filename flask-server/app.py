@@ -42,8 +42,13 @@ def get_terrain_factor(terrain_type, speed):
         terrain_factor = 1.0  # Default terrain factor if not specified
     return terrain_factor
 
+def convert_lbs_to_kg(weight):
+    return weight * 0.453592
 
-def calculate_calories(weight, pack_weight, speed, incline_grade, terrain_type):
+def convert_mph_to_mps(speed):
+    return speed * 0.44704
+
+def calculate_calories(weight, isWeightKg, pack_weight, isPackWeightKg, speed, isSpeedMps, incline_grade, terrain_type):
     """
     Calculate the calories burned per hour based on the given parameters.
     
@@ -69,6 +74,14 @@ def calculate_calories(weight, pack_weight, speed, incline_grade, terrain_type):
     #     raise ValueError("Terrain factor must be a numeric value.")
 
     terrain_factor = get_terrain_factor(terrain_type, speed)
+    if not isWeightKg:
+        weight = convert_lbs_to_kg(weight)
+
+    if not isPackWeightKg:
+        pack_weight = convert_lbs_to_kg(pack_weight)
+    
+    if not isSpeedMps:
+        speed = convert_mph_to_mps(speed)
 
     # Calculate the total metabolic rate in watts (M)
     M = 1.5 * weight + 2.0 * (weight + pack_weight) * (pack_weight / weight) ** 2
@@ -83,16 +96,21 @@ def calculate():
     """
     Endpoint to calculate calories burned per hour.
     
-    Expects JSON with weight, pack_weight, speed, incline_grade, terrain_factor.
+    Expects JSON with weight, isWeightKg, pack_weight, isPackWeightKg, speed, isSpeedMps, incline_grade, terrain_type, hours.
     """
+
+
     data = request.json
     weight = data['weight']
+    isWeightKg = data['isWeightKg']
     pack_weight = data['pack_weight']
+    isPackWeightKg = data['isPackWeightKg']
     speed = data['speed']
+    isSpeedMps = data['isSpeedMps']
     incline_grade = data['incline_grade']
     terrain_type = data['terrain_type']
     
-    result = calculate_calories(weight, pack_weight, speed, incline_grade, terrain_type)
+    result = calculate_calories(weight, isWeightKg, pack_weight, isPackWeightKg, speed, isSpeedMps, incline_grade, terrain_type)
     
     return jsonify({"calories_per_hour": result})
 

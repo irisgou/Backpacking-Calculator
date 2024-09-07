@@ -4,7 +4,9 @@ from flask_cors import CORS
 # app = Flask(__name__)
 app = Flask(__name__, static_folder='build')
 
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+# CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+
+CORS(app, resources={r"/*": {"origins": "https://backpacking-energy-expenditure-calculator.onrender.com"}})
 
 # @app.route('/')
 # def home():
@@ -23,6 +25,11 @@ def serve():
 @app.route('/<path:path>')
 def serve_static(path):
     return send_from_directory(app.static_folder, path)
+
+@app.route('/api/<endpoint>', methods=['GET', 'POST'])
+def api_endpoint(endpoint):
+    # Handle API request
+    pass
 
 def get_terrain_factor(terrain_type, speed):
     terrain_factor = None

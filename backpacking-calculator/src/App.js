@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { calculateCalories } from "./api";
 import { Switch } from "@headlessui/react";
 import {
   CheckCircleIcon,

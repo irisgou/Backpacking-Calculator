@@ -1,16 +1,28 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 
-app = Flask(__name__)
+# app = Flask(__name__)
+app = Flask(__name__, static_folder='build')
+
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
-@app.route('/')
-def home():
-    return "Welcome to the Backpacking Calorie Burn Calculator API"
+# @app.route('/')
+# def home():
+#     return "Welcome to the Backpacking Calorie Burn Calculator API"
 
-@app.route('/ws')
-def websocket_route():
-    return "WebSocket route"
+# @app.route('/ws')
+# def websocket_route():
+#     return "WebSocket route"
+
+# Serve React front-end from the 'build/' directory
+@app.route('/')
+def serve():
+    return send_from_directory(app.static_folder, 'index.html')
+
+# Serve any static assets from the 'build/' directory
+@app.route('/<path:path>')
+def serve_static(path):
+    return send_from_directory(app.static_folder, path)
 
 def get_terrain_factor(terrain_type, speed):
     terrain_factor = None

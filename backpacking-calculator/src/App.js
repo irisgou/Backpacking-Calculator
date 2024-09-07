@@ -6,12 +6,12 @@ import {
 } from "@heroicons/react/24/solid";
 
 const terrainOptions = [
-  { label: "Slippery Terrain", value: "Slippery Terrain" },
-  { label: "Vegetation", value: "Vegetation" }, // Will calculate based on speed
-  { label: "Swamp", value: "Swamp" },
   { label: "Paved Road", value: "Paved Road" },
-  { label: "Gravel Road", value: "Gravel Road" },
   { label: "Dirt Road", value: "Dirt Road" },
+  { label: "Gravel Road", value: "Gravel Road" },
+  { label: "Vegetation", value: "Vegetation" }, // Will calculate based on speed
+  { label: "Slippery Terrain", value: "Slippery Terrain" },
+  { label: "Swamp", value: "Swamp" },
   { label: "Sand", value: "Sand" }, // Will calculate based on speed
 ];
 

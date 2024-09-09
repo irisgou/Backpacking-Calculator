@@ -116,7 +116,8 @@ function App() {
           Backpacking Calorie Burn Calculator
         </h1>
         <h2>
-          Based on{" "}
+          This calculator estimates the number of calories expended while hiking
+          with a weighted pack based on{" "}
           <a
             href="https://journals.physiology.org/doi/abs/10.1152/jappl.1977.43.4.577"
             target="_blank"
@@ -326,8 +327,8 @@ function App() {
           {caloriesPerHour && totalCalories && (
             <div className="mt-6 p-4 bg-green-100 rounded-md">
               <div className="flex items-center text-green-700 mb-2">
-                <CheckCircleIcon className="w-6 h-6 mr-2" />
-                <h2 className="text-lg font-semibold">Results</h2>
+                {/* <CheckCircleIcon className="w-6 h-6 mr-2" /> */}
+                {/* <h2 className="text-lg font-semibold">Results</h2> */}
               </div>
               <p className="text-gray-700">
                 <span className="font-medium">Calories Burned Per Hour:</span>{" "}

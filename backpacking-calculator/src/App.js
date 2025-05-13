@@ -4,15 +4,16 @@ import {
   CheckCircleIcon,
   ExclamationCircleIcon,
 } from "@heroicons/react/24/solid";
+import "./App.css";
 
 const terrainOptions = [
   { label: "Paved Road", value: "Paved Road" },
   { label: "Dirt Road", value: "Dirt Road" },
   { label: "Gravel Road", value: "Gravel Road" },
-  { label: "Vegetation", value: "Vegetation" }, // Will calculate based on speed
+  { label: "Vegetation", value: "Vegetation" }, // Will calculate caloric spend based on speed
   { label: "Slippery Terrain", value: "Slippery Terrain" },
   { label: "Swamp", value: "Swamp" },
-  { label: "Sand", value: "Sand" }, // Will calculate based on speed
+  { label: "Sand", value: "Sand" }, // Will calculate caloric spend based on speed
 ];
 
 function App() {
@@ -135,34 +136,31 @@ function App() {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Body Weight
             </label>
-            <div className="flex">
+            <div className="flex items-center gap-2">
               <input
                 type="number"
                 step="any"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
-                className="flex-1 border border-gray-300 rounded-l-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                className="text-input-base"
+                // className="flex-1 gap-2 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                 placeholder={`Enter weight in ${isWeightKg ? "kg" : "lbs"}`}
                 required
               />
               <Switch
                 checked={isWeightKg}
                 onChange={setIsWeightKg}
-                className={`$ bg-gray-200
-                  //{
-                  // isWeightKg ? "bg-blue-600" : "bg-gray-200" } 
-                
-                relative inline-flex items-center h-10 rounded-r-md w-24 transition-colors focus:outline-none`}
+                className={`$ bg-gray-200 relative inline-flex items-center h-10 rounded-md w-24 transition-colors focus:outline-none`}
               >
                 <span
                   className={`${
                     isWeightKg ? "translate-x-0" : "translate-x-12"
-                  } inline-block w-12 h-8 transform bg-white rounded-md shadow-md transition-transform`}
+                  } inline-block w-12 h-8 ml-1 mr-1 transform bg-white rounded-md shadow-md transition-transform`}
                 />
-                <span className="absolute left-2 text-sm font-medium text-gray-700">
+                <span className="absolute left-3 text-sm font-medium text-gray-700">
                   kg
                 </span>
-                <span className="absolute right-2 text-sm font-medium text-gray-700">
+                <span className="absolute right-3 text-sm font-medium text-gray-700">
                   lbs
                 </span>
               </Switch>
@@ -174,13 +172,13 @@ function App() {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Pack Weight
             </label>
-            <div className="flex">
+            <div className="flex items-center gap-2">
               <input
                 type="number"
                 step="any"
                 value={pack_weight}
                 onChange={(e) => setPackWeight(e.target.value)}
-                className="flex-1 border border-gray-300 rounded-l-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                className="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                 placeholder={`Enter pack weight in ${
                   isPackWeightKg ? "kg" : "lbs"
                 }`}
@@ -189,12 +187,7 @@ function App() {
               <Switch
                 checked={isPackWeightKg}
                 onChange={setIsPackWeightKg}
-                className={`$  bg-gray-200
-                  
-                //   {
-                //   isPackWeightKg ? "bg-blue-600" : "bg-gray-200"
-                // } 
-                  relative inline-flex items-center h-10 rounded-r-md w-24 transition-colors focus:outline-none`}
+                className={`$ bg-gray-200 relative inline-flex items-center h-10 rounded-md w-24 transition-colors focus:outline-none`}
               >
                 <span
                   className={`${
@@ -216,13 +209,13 @@ function App() {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Hiking Speed
             </label>
-            <div className="flex">
+            <div className="flex items-center gap-2">
               <input
                 type="number"
                 step="any"
                 value={speed}
                 onChange={(e) => setSpeed(e.target.value)}
-                className="flex-1 border border-gray-300 rounded-l-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                className="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                 placeholder={`Enter speed in ${isSpeedMps ? "m/s" : "mph"}`}
                 required
               />
@@ -230,10 +223,7 @@ function App() {
                 checked={isSpeedMps}
                 onChange={setIsSpeedMps}
                 className={`$ bg-gray-200
-                //   {
-                //   isSpeedMps ? "bg-blue-600" : "bg-gray-200"
-                // } 
-                  relative inline-flex items-center h-10 rounded-r-md w-24 transition-colors focus:outline-none`}
+                  relative inline-flex items-center h-10 rounded-md w-24 transition-colors focus:outline-none`}
               >
                 <span
                   className={`${

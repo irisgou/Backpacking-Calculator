@@ -136,31 +136,30 @@ function App() {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Body Weight
             </label>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1">
               <input
                 type="number"
                 step="any"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
-                className="text-input-base"
-                // className="flex-1 gap-2 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                className="text-input-base text-input-base-medium"
                 placeholder={`Enter weight in ${isWeightKg ? "kg" : "lbs"}`}
                 required
               />
               <Switch
                 checked={isWeightKg}
                 onChange={setIsWeightKg}
-                className={`$ bg-gray-200 relative inline-flex items-center h-10 rounded-md w-24 transition-colors focus:outline-none`}
+                className="switch-weight"
               >
                 <span
                   className={`${
-                    isWeightKg ? "translate-x-0" : "translate-x-12"
-                  } inline-block w-12 h-8 ml-1 mr-1 transform bg-white rounded-md shadow-md transition-transform`}
+                    isWeightKg ? "translate-x-0" : "translate-x-11"
+                  } inline-block w-11 h-8 ml-1 mr-1 transform bg-white rounded-md shadow-md transition-transform`}
                 />
-                <span className="absolute left-3 text-sm font-medium text-gray-700">
+                <span className="absolute left-4 text-sm font-medium text-gray-700">
                   kg
                 </span>
-                <span className="absolute right-3 text-sm font-medium text-gray-700">
+                <span className="absolute right-4 text-sm font-medium text-gray-700">
                   lbs
                 </span>
               </Switch>
@@ -172,13 +171,13 @@ function App() {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Pack Weight
             </label>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1">
               <input
                 type="number"
                 step="any"
                 value={pack_weight}
                 onChange={(e) => setPackWeight(e.target.value)}
-                className="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                className="text-input-base text-input-base-medium"
                 placeholder={`Enter pack weight in ${
                   isPackWeightKg ? "kg" : "lbs"
                 }`}
@@ -187,17 +186,17 @@ function App() {
               <Switch
                 checked={isPackWeightKg}
                 onChange={setIsPackWeightKg}
-                className={`$ bg-gray-200 relative inline-flex items-center h-10 rounded-md w-24 transition-colors focus:outline-none`}
+                className="switch-weight"
               >
                 <span
                   className={`${
-                    isPackWeightKg ? "translate-x-0" : "translate-x-12"
-                  } inline-block w-12 h-8 transform bg-white rounded-md shadow-md transition-transform`}
+                    isPackWeightKg ? "translate-x-0" : "translate-x-11"
+                  } inline-block w-11 h-8 ml-1 mr-1 transform bg-white rounded-md shadow-md transition-transform`}
                 />
-                <span className="absolute left-2 text-sm font-medium text-gray-700">
+                <span className="absolute left-4 text-sm font-medium text-gray-700">
                   kg
                 </span>
-                <span className="absolute right-2 text-sm font-medium text-gray-700">
+                <span className="absolute right-4 text-sm font-medium text-gray-700">
                   lbs
                 </span>
               </Switch>
@@ -209,31 +208,30 @@ function App() {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Hiking Speed
             </label>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1">
               <input
                 type="number"
                 step="any"
                 value={speed}
                 onChange={(e) => setSpeed(e.target.value)}
-                className="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                className="text-input-base text-input-base-medium"
                 placeholder={`Enter speed in ${isSpeedMps ? "m/s" : "mph"}`}
                 required
               />
               <Switch
                 checked={isSpeedMps}
                 onChange={setIsSpeedMps}
-                className={`$ bg-gray-200
-                  relative inline-flex items-center h-10 rounded-md w-24 transition-colors focus:outline-none`}
+                className={`$ bg-gray-200 relative inline-flex items-center h-10 rounded-md w-24 transition-colors focus:outline-none`}
               >
                 <span
                   className={`${
-                    isSpeedMps ? "translate-x-0" : "translate-x-12"
-                  } inline-block w-12 h-8 transform bg-white rounded-md shadow-md transition-transform`}
+                    isSpeedMps ? "translate-x-0" : "translate-x-11"
+                  } inline-block w-11 h-8 ml-1 mr-1 transform bg-white rounded-md shadow-md transition-transform`}
                 />
-                <span className="absolute left-2 text-sm font-medium text-gray-700">
+                <span className="absolute left-3 text-sm font-medium text-gray-700">
                   m/s
                 </span>
-                <span className="absolute right-2 text-sm font-medium text-gray-700">
+                <span className="absolute right-3 text-sm font-medium text-gray-700">
                   mph
                 </span>
               </Switch>
@@ -250,7 +248,7 @@ function App() {
               step="any"
               value={incline_grade}
               onChange={(e) => setGrade(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+              className="text-input-base text-input-base-full"
               placeholder="Enter incline grade percentage"
               required
             />
@@ -288,8 +286,8 @@ function App() {
               step="any"
               value={hours}
               onChange={(e) => setHours(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Enter number of hours"
+              className="text-input-base text-input-base-full"
+              placeholder="Enter number of hours spent hiking"
               required
             />
           </div>

@@ -1,5 +1,5 @@
 const API_URL =
-  "https://backpacking-energy-expenditure-calculator.onrender.com"; // Replace with your Flask app URL
+  "https://backpacking-energy-expenditure-calculator.onrender.com"; // Replace with Flask app URL
 
 export async function calculateCalories(data) {
   try {

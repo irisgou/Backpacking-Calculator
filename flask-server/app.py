@@ -6,7 +6,10 @@ app = Flask(__name__, static_folder='build')
 
 # CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
-CORS(app, resources={r"/*": {"origins": "https://backpacking-energy-expenditure-calculator.onrender.com"}})
+# CORS(app, resources={r"/*": {"origins": "https://backpacking-energy-expenditure-calculator.onrender.com"}})
+CORS(app, resources={r"/*": {"origins": "https://backpacking-calculator.onrender.com"}})
+
+
 
 # @app.route('/')
 # def home():
